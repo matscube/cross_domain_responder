@@ -12,13 +12,12 @@ class ApiController < ApplicationController
 			separator = '/'
 			scheme_separator = '//'
 			parts = url.split(scheme_separator)[1].split(separator)
-
 			host = parts.shift
-			resource = parts.join(separator)
 
 			https = Net::HTTP.new(host, 80)
-			req = Net::HTTP::Get.new(resource)
+			req = Net::HTTP::Get.new(url)
 			res = https.request(req)
+
 
 			if res.body.nil?
 				render :text => "Error"
